@@ -100,6 +100,31 @@ const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), te
         //console.dir(err);
       });
 
+      await api.transact({
+        actions: [{
+          account: 'atomicassets',
+          name: 'extendschema',
+          authorization: [{
+            actor: 'ohvanankaahu',
+            permission: 'owner',
+          }],
+          data: {
+            authorized_editor: 'ohvanankaahu',
+            collection_name: 'dhtestdhtest',
+            schema_name: "dhschema",
+            schema_format_extension: [{"name": "tree_image", "type": "image"}]
+          },
+        }]
+      }, {
+        blocksBehind: 3,
+        expireSeconds: 1200,
+      }).then(res => {
+        console.dir(res);
+      }).catch(err => {
+        console.log("failed to extend schema - see next line");
+        console.dir(err.message);
+        //console.dir(err);
+      });
 
       //a82f7114d5906a9b13cdcef7514fca3977bf8abafbdf258c1ea2a62d19ca637f
       //160836 (template id)
@@ -134,63 +159,63 @@ const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), te
       //   //console.dir(err);
       // });
 
-      // await api.transact({
-      //   actions: [{
-      //     account: 'atomicassets',
-      //     name: 'mintasset',
-      //     authorization: [{
-      //       actor: 'ohvanankaahu',
-      //       permission: 'owner',
-      //     }],
-      //     data: {
-      //       authorized_minter: 'ohvanankaahu',
-      //       collection_name: 'dhtestdhtest',
-      //       schema_name: "dhschema",
-      //       template_id: 160836,
-      //       new_asset_owner: 'ohvanankaahu',
-      //       immutable_data: [{"key": "tree_type", "value": ["string", "Silver Birch"]}],
-      //       mutable_data: [],
-      //       tokens_to_back: []
-      //     },
-      //   }]
-      // }, {
-      //   blocksBehind: 3,
-      //   expireSeconds: 1200,
-      // }).then(res => {
-      //   console.dir(res);
-      // }).catch(err => {
-      //   console.log("failed to mint asset - see next line");
-      //   console.dir(err.message);
-      //   //console.dir(err);
-      // });
+      await api.transact({
+        actions: [{
+          account: 'atomicassets',
+          name: 'mintasset',
+          authorization: [{
+            actor: 'ohvanankaahu',
+            permission: 'owner',
+          }],
+          data: {
+            authorized_minter: 'ohvanankaahu',
+            collection_name: 'dhtestdhtest',
+            schema_name: "dhschema",
+            template_id: 160836,
+            new_asset_owner: 'ohvanankaahu',
+            immutable_data: [{"key": "tree_type", "value": ["string", "Silver Birch"]}, {"key": "tree_image", "value": ["string", "QmZ6gBzTEUNor2G1qC5cBh1WNXKfWVa7wAz6ei9otFowsC"]}],
+            mutable_data: [],
+            tokens_to_back: []
+          },
+        }]
+      }, {
+        blocksBehind: 3,
+        expireSeconds: 1200,
+      }).then(res => {
+        console.dir(res);
+      }).catch(err => {
+        console.log("failed to mint asset - see next line");
+        console.dir(err.message);
+        //console.dir(err);
+      });
 
     //TRANSER ASSET
 
-    await api.transact({
-      actions: [{
-        account: 'atomicassets',
-        name: 'transfer',
-        authorization: [{
-          actor: 'ohvanankaahu',
-          permission: 'owner',
-        }],
-        data: {
-          from: 'ohvanankaahu',
-          to: 'test1111test',
-          asset_ids: [1099517092989],
-          memo: "testing 123"
-        },
-      }]
-    }, {
-      blocksBehind: 3,
-      expireSeconds: 1200,
-    }).then(res => {
-      console.dir(res);
-    }).catch(err => {
-      console.log("failed to transer asset - see next line");
-      console.dir(err.message);
-      //console.dir(err);
-    });
+    // await api.transact({
+    //   actions: [{
+    //     account: 'atomicassets',
+    //     name: 'transfer',
+    //     authorization: [{
+    //       actor: 'ohvanankaahu',
+    //       permission: 'owner',
+    //     }],
+    //     data: {
+    //       from: 'ohvanankaahu',
+    //       to: 'test1111test',
+    //       asset_ids: [1099517092989],
+    //       memo: "testing 123"
+    //     },
+    //   }]
+    // }, {
+    //   blocksBehind: 3,
+    //   expireSeconds: 1200,
+    // }).then(res => {
+    //   console.dir(res);
+    // }).catch(err => {
+    //   console.log("failed to transer asset - see next line");
+    //   console.dir(err.message);
+    //   //console.dir(err);
+    // });
 
     // await rpc.get_table_rows({
     //   json: true,               // Get the response as json
